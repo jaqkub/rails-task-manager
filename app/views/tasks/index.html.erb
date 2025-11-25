@@ -1,16 +1,17 @@
 <h1> My Tasks </h1>
 
-<ul>
+<ul class="tasks-list">
   <% @tasks.each do |task|  %>
     <li>
-      <%= task.completed %>
+      <%= check_box_tag "task_#{task.id}", "", task.completed, disabled: true %>
       <%= link_to task.title, task_path(task)  %>
-      <%= link_to "Delete",
+      <%= link_to "🗑",
                   task_path(task),
-                  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                  class: "text-danger ms-2" %>
+                  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
     </li>
   <% end %>
 </ul>
 
-<%= link_to "Create new task", new_task_path  %>
+<p class="add-task-link">
+  <%= link_to "+ Add a new task", new_task_path %>
+</p>
